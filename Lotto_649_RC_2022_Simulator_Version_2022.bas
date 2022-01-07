@@ -343,13 +343,10 @@ answer$ = Input$(1)
 answer$ = UCase$(answer$)
 If answer$ <> "Y" Then GoTo finish
 GoSub banker
-If randome$ = "Y" Then
-    Print "Using random numbers"
-End If
 If randome$ = "N" Then
     Print "Using a : "; qqq; " Wheeling system."
 End If
-moneytotal = sets * 4
+moneytotal = sets * 5
 diskcop:
 diskcopy$ = "Y"
 Cls
@@ -367,8 +364,8 @@ Open file$ For Output As #2
 Print #2, draw2$
 Print "Filename is : ", file$
 If display$ = "Y" Then
-    If speed$ = "Readable" Then speed = 2500000
-    If (sets) > 100 Then speed = 1
+    If speed$ = "Readable" Then speed = 7500000
+    If (sets * 3) > 100 Then speed = 1
 Else
     speed = 10
 End If
@@ -525,58 +522,58 @@ If hardcopy$ = "Y" Or hardcopy$ = "y" Then
     LPrint
 End If
 
-For x = 1 To sets
-    For y = 1 To 6
-        GoSub pick
-    Next y
-    If randome$ = "no" Then
-        For i = 1 To 6
-            temp(i) = entry(temp(i))
-        Next i
-    End If
+
+For y = 1 To 6
+    GoSub pick
+Next y
+If randome$ = "no" Then
     For i = 1 To 6
-        temp2(i) = temp(i)
+        temp(i) = entry(temp(i))
     Next i
-    For j = 1 To 6
-        marker = 99
-        For i = 1 To 6
-            If temp2(i) < marker Then
-                marker = temp2(i)
-                marker2 = i
-            End If
-        Next i
-        temp2(marker2) = 99
-        temp(j) = marker
-    Next j
+End If
+For i = 1 To 6
+    temp2(i) = temp(i)
+Next i
+For j = 1 To 6
+    marker = 99
+    For i = 1 To 6
+        If temp2(i) < marker Then
+            marker = temp2(i)
+            marker2 = i
+        End If
+    Next i
+    temp2(marker2) = 99
+    temp(j) = marker
+Next j
 
-    atemp = temp(1): btemp = temp(2): ctemp = temp(3): dtemp = temp(4): etemp = temp(5): ftemp = temp(6)
-    If display$ = "Y" Then
-        Print Using "## ## ## ## ## ##       "; atemp, btemp, ctemp, dtemp, etemp, ftemp
-        For aaaa = 1 To speed: Next aaaa
-    End If
-    atemp = temp(1): btemp = temp(2): ctemp = temp(3): dtemp = temp(4): etemp = temp(5): ftemp = temp(6)
+atemp = temp(1): btemp = temp(2): ctemp = temp(3): dtemp = temp(4): etemp = temp(5): ftemp = temp(6)
+If display$ = "Y" Then
+    Print Using "## ## ## ## ## ##       "; atemp, btemp, ctemp, dtemp, etemp, ftemp
+    For aaaa = 1 To speed: Next aaaa
+End If
+atemp = temp(1): btemp = temp(2): ctemp = temp(3): dtemp = temp(4): etemp = temp(5): ftemp = temp(6)
 
-    Print #2, Using "## ## ## ## ## ##       "; atemp, btemp, ctemp, dtemp, etemp, ftemp
-
-
-
-
-
-    If hardcopy$ = "Y" Or hardcopy$ = "y" Then
-        LPrint Using "## ## ## ## ## ##   "; atemp, btemp, ctemp, dtemp, etemp, ftemp
-    End If
+Print #2, Using "## ## ## ## ## ##       "; atemp, btemp, ctemp, dtemp, etemp, ftemp
 
 
-    GoSub cleararrays
 
 
-    If hardcopy$ = "Y" Then
-        LPrint ""
-    End If
-    Print ""
-Next x
+
+If hardcopy$ = "Y" Or hardcopy$ = "y" Then
+    LPrint Using "## ## ## ## ## ##   "; atemp, btemp, ctemp, dtemp, etemp, ftemp
+End If
+
+
+GoSub cleararrays
+
+
+If hardcopy$ = "Y" Then
+    LPrint ""
+End If
+Print ""
+
 Close #2
-moneytotal = sets * 4
+moneytotal = sets * 3
 Open "previousbalance.dat" For Output As #1
 Print #1, previousbalance
 Close #1
@@ -1233,7 +1230,7 @@ For i = 15 To 19
 Next i
 If crs$ = "Y" Then Color 10, 5
 Locate 3, 7
-Print "     Lotto 649 Simulator RC 2022 Ver 2022 Barchart Menu            "
+Print "     Lotto 649 Simulator RC 2022 Version 2022 Barchart Menu        "
 Locate 13, 7
 Print "                     Other Options Available                       "
 Locate 5, 7
@@ -1625,7 +1622,7 @@ For i = 1 To 49
     Print Chr$(188)
     If crs$ = "Y" Then Color 10, 5
     Locate 4, 11
-    Print "Lotto 649 Simulator RC 2022 Ver 2022 Search and Print Menu"
+    Print "Lotto 649 Simulator RC 2022 Ver. 2022 Search & Print Menu "
     If crs$ = "Y" Then Color 4, 7
     For i = 6 To 10
         Locate i, 17
@@ -2364,7 +2361,7 @@ Cls
 If crs$ = "Y" Then Color 10, 5
 
 Locate 4, 18
-Print " Lotto 649 Ver 2022 RC 2022  Print Menu "
+Print " Lotto 649 Version 2022 RC 2022  Print Menu"
 If crs$ = "Y" Then Color 3, 8
 Locate 3, 17
 Print Chr$(201)
